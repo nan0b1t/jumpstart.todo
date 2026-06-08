@@ -7,7 +7,9 @@ name = "jumpstart.todo"
 version = "0.1.0"
 requires-python = ">=3.11"
 dependencies = [
+    "platformdirs",
     "click>=8.1",
+    "prompt-toolkit>=3.0.36"
 ]
 
 [project.scripts]
@@ -22,8 +24,13 @@ dev = [
 
 [tool.hatch.envs.default]
 features = ["dev"]
+type = "virtual"
+path = ".venv"
 
 [tool.hatch.envs.default.scripts]
 test = "pytest tests/ -v"
 lint = "ruff check src/"
 typecheck = "mypy src/"
+
+[tool.hatch.build.targets.wheel]
+packages = ["jumpstart_todo"]

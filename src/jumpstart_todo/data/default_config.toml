@@ -1,0 +1,8 @@
+[display]
+emojis = true           # show emojis in output
+indent = 2              # the indent level in spaces
+# cheerfulness of output. for example "task completed" vs "Congratulations! Task completed!"
+cheerfulness = 5  # (0 - 10)
+
+[interactive]
+fuzzy_threshold = 80    # rapidfuzz score cutoff, 0-100
