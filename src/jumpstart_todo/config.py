@@ -7,18 +7,22 @@ from importlib.resources import files
 import shutil
 import tomllib
 from typing import Any
+from jumpstart_todo.registry import Registry
 
 
 class Config:
     """Core configuration class"""
 
     data: dict[str, Any]  # type: ignore[reportAny]
+    registry: Registry
 
     def __init__(self, data=None) -> None:
         if data == None:
             self.data = {}
         else:
             self.data = data
+
+        self.registry = Registry()
 
 
 def find_file(file: str, start_path: Path | str = ".") -> Path | None:

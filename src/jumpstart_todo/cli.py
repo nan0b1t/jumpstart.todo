@@ -1,6 +1,8 @@
 import click
+from prompt_toolkit import prompt
 import pprint
 from jumpstart_todo.config import Config, bootstrap
+import pathlib
 
 
 @click.group()
@@ -25,7 +27,11 @@ def ShowConfig(ctx: click.Context):
 
 @main.command()
 @click.pass_context
-def init(ctx: click.Context):
+@click.argument('name', required=False, default=None)
+def init(ctx: click.Context, name: str | None):
+    if name == None:
+        name = prompt("Enter a name for this project")
+
     try:
         open(".todo", "x").close()
         if ctx.obj["config"].data["display"]["cheerfulness"] < 7:
@@ -35,3 +41,5 @@ def init(ctx: click.Context):
 
     except FileExistsError:
         print(".todo file already exists in current directory")
+
+    ctx.obj["config"].registry.add_project(name, str(pathlib.Path.cwd()))
